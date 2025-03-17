@@ -1,9 +1,10 @@
 <script>
 	import { onMount } from 'svelte';
 	import Dashboard from './components/Dashboard.svelte';
-	import Students from './components/Students.svelte';
 	import Sidebar from './components/Sidebar.svelte';
 	import Header from './components/Header.svelte';
+    import Students from './components/Students/Students.svelte';
+  	import Teachers from './components/Teachers/Teachers.svelte';
 	
 	let currentView = 'dashboard';
 	let user = { name: 'Admin User', role: 'Administrator' };
@@ -60,6 +61,10 @@
 		  <Dashboard {schoolStats} />
 		{:else if currentView === 'students'}
 		  <Students {students} />
+		{:else if currentView === 'teachers'}
+		  <Teachers/>
+		{:else}
+		  <div class="loading">Comming Soon</div>
 		{/if}
 	  {/if}
 	</div>

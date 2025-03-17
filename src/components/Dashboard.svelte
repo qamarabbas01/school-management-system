@@ -1,5 +1,5 @@
 <script>
-  import AttendanceChart from './AttendanceChart.svelte';
+  import AttendanceChart from './AttendanceChart/AttendanceChart.svelte'
   export let schoolStats;
 
   let activities = [
