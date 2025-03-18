@@ -16,7 +16,7 @@
 
 <aside class="sidebar">
   <div class="logo">
-    <h2>School MS</h2>
+    <h2>TLHSS</h2>
   </div>
 
   <nav>

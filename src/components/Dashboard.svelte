@@ -1,19 +1,28 @@
 <script>
-  import AttendanceChart from './AttendanceChart/AttendanceChart.svelte'
+  import AttendanceChart from "./AttendanceChart/AttendanceChart.svelte";
   export let schoolStats;
 
   let activities = [
-    { id: 1, type: 'registration', description: 'New student registered', time: '2 hours ago' },
-    { id: 2, type: 'attendance', description: 'Attendance marked for Class 10', time: '3 hours ago' },
-    { id: 3, type: 'exam', description: 'Math exam results uploaded', time: '5 hours ago' },
-    { id: 4, type: 'notice', description: 'New notice added about Sports Day', time: '1 day ago' },
-    { id: 5, type: 'fee', description: 'Fee payment received from Jack Smith', time: '1 day ago' }
+    { id: 1, type: "registration", description: "New student registered", time: "2 hours ago" },
+    { id: 2, type: "attendance", description: "Attendance marked for Class 10", time: "3 hours ago" },
+    { id: 3, type: "exam", description: "Math exam results uploaded", time: "5 hours ago" },
+    { id: 4, type: "notice", description: "New notice added about Sports Day", time: "1 day ago" },
+    { id: 5, type: "fee", description: "Fee payment received from Jack Smith", time: "1 day ago" },
+    { id: 6, type: "registration", description: "New student registered", time: "2 hours ago" },
+    { id: 7, type: "attendance", description: "Attendance marked for Class 10", time: "3 hours ago" },
+    { id: 8, type: "exam", description: "Math exam results uploaded", time: "5 hours ago" },
+    { id: 9, type: "notice", description: "New notice added about Sports Day", time: "1 day ago" },
+    { id: 10, type: "fee", description: "Fee payment received from Jack Smith", time: "1 day ago" },
+    { id: 11, type: "attendance", description: "Attendance marked for Class 10", time: "3 hours ago" },
+    { id: 12, type: "exam", description: "Math exam results uploaded", time: "5 hours ago" },
+    { id: 13, type: "notice", description: "New notice added about Sports Day", time: "1 day ago" },
+    { id: 14, type: "fee", description: "Fee payment received from Jack Smith", time: "1 day ago" }
   ];
 
   let attendanceData = {
     daily: [],
     monthly: [],
-    yearly: [] 
+    yearly: []
   };
 </script>
 
@@ -52,6 +61,14 @@
         <p class="stat-value">{schoolStats.attendance}%</p>
       </div>
     </div>
+
+    <div class="stat-card">
+      <div class="stat-icon attendance">👤</div>
+      <div class="stat-info">
+        <h3>Leave Students</h3>
+        <p class="stat-value">{schoolStats.leaveStudents}</p>
+      </div>
+    </div>
   </div>
 
   <div class="dashboard-content">
@@ -65,15 +82,15 @@
         {#each activities as activity}
           <li class="activity-item">
             <div class="activity-icon">
-              {#if activity.type === 'registration'}
+              {#if activity.type === "registration"}
                 👤
-              {:else if activity.type === 'attendance'}
+              {:else if activity.type === "attendance"}
                 📋
-              {:else if activity.type === 'exam'}
+              {:else if activity.type === "exam"}
                 📝
-              {:else if activity.type === 'notice'}
+              {:else if activity.type === "notice"}
                 📢
-              {:else if activity.type === 'fee'}
+              {:else if activity.type === "fee"}
                 💰
               {/if}
             </div>
@@ -149,6 +166,8 @@
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-height: 600px;
+    overflow-y: auto;
   }
 
   .activities-container h2 {

@@ -13,7 +13,8 @@
 	  totalStudents: 0,
 	  totalTeachers: 0,
 	  totalClasses: 0,
-	  attendance: 0
+	  attendance: 0,
+	  leaveStudents: 0
 	};
 	
 	let students = [];
@@ -26,7 +27,8 @@
 		totalStudents: 1250,
 		totalTeachers: 75,
 		totalClasses: 45,
-		attendance: 92
+		attendance: 92,
+		leaveStudents: 25
 	  };
 	  
 	  students = [
@@ -64,7 +66,7 @@
 		{:else if currentView === 'teachers'}
 		  <Teachers/>
 		{:else}
-		  <div class="loading">Comming Soon</div>
+		  <div class="loading">Comming Soon...</div>
 		{/if}
 	  {/if}
 	</div>

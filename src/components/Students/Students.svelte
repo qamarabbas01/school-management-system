@@ -1,13 +1,30 @@
 <script>
+  import Button from '../ui/Button/Button.svelte';
+  import Modal from '../ui/Modal/Modal.svelte';
   export let students = [];
   
   let searchTerm = '';
-  
+  let isModalOpen = false;
+  let nextId = students.length ? Math.max(...students.map(s => s.id)) + 1 : 1;
+
   $: filteredStudents = students.filter(student => 
     student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     student.grade.toLowerCase().includes(searchTerm.toLowerCase()) ||
     student.section.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  function openModal() {
+    isModalOpen = true;
+  }
+
+  function closeModal() {
+    isModalOpen = false;
+  }
+
+  function addStudent(event) {
+    const newStudent = { ...event.detail, id: nextId++ };
+    students = [...students, newStudent];
+  }
 </script>
 
 <div class="students-page">
@@ -19,7 +36,7 @@
       placeholder="Search students..."
       bind:value={searchTerm}
     />
-    <button class="add-btn">+ Add Student</button>
+    <Button onClick={openModal} mode="success" className="add-btn">+ Add Student</Button>
   </div>
   
   <div class="students-table">
@@ -45,8 +62,8 @@
             <td>{student.attendance}%</td>
             <td>{student.performance}</td>
             <td class="actions">
-              <button class="view-btn">View</button>
-              <button class="edit-btn">Edit</button>
+              <Button mode="primary" class="view-btn">View</Button>
+              <Button mode="warning" className="edit-btn">Edit</Button>
             </td>
           </tr>
         {/each}
@@ -54,6 +71,8 @@
     </table>
   </div>
 </div>
+
+<Modal bind:isOpen={isModalOpen} on:addStudent={addStudent} />
 
 <style>
   .students-page {
@@ -76,15 +95,6 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     width: 300px;
-  }
-  
-  .add-btn {
-    padding: 10px 15px;
-    background-color: #2ecc71;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
   }
   
   .students-table {
@@ -115,20 +125,4 @@
     gap: 10px;
   }
   
-  .view-btn, .edit-btn {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .view-btn {
-    background-color: #3498db;
-    color: white;
-  }
-  
-  .edit-btn {
-    background-color: #f39c12;
-    color: white;
-  }
 </style>
