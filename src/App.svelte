@@ -5,6 +5,7 @@
 	import Header from './components/Header.svelte';
     import Students from './components/Students/Students.svelte';
   	import Teachers from './components/Teachers/Teachers.svelte';
+  import Classes from './components/Classes/Classes.svelte';
 	
 	let currentView = 'dashboard';
 	let user = { name: 'Admin User', role: 'Administrator' };
@@ -65,6 +66,8 @@
 		  <Students {students} />
 		{:else if currentView === 'teachers'}
 		  <Teachers/>
+		{:else if currentView === 'classes'}
+		   <Classes />
 		{:else}
 		  <div class="loading">Comming Soon...</div>
 		{/if}
