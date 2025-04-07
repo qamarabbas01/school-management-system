@@ -9,7 +9,6 @@
     { id: "classes", label: "Classes", icon: "🏫" },
     { id: "attendance", label: "Attendance", icon: "📋" },
     { id: "exams", label: "Exams", icon: "📝" },
-    { id: "reports", label: "Reports", icon: "📊" },
     { id: "settings", label: "Settings", icon: "⚙️" },
   ];
 </script>
