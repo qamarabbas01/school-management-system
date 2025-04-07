@@ -195,6 +195,7 @@
               on:click={() => viewClassDetails(cls)}
               on:keydown={(e) => e.key === 'Enter' && viewClassDetails(cls)}
             >
+             See Details
             </button>
               <div class="class-card-header">
                 <h3>{cls.name}</h3>
