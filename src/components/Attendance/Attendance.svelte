@@ -2,17 +2,14 @@
   import { onMount, createEventDispatcher } from "svelte";
   import { fade, slide } from "svelte/transition";
 
-  // Event dispatcher for external communication
   const dispatch = createEventDispatcher();
 
-  // Props with defaults
   export let title = "Student Attendance Tracker";
   export let students = [];
   export let editable = true;
   export let showFilters = true;
   export let showStats = true;
 
-  // Load sample data if none provided
   onMount(() => {
     if (students.length === 0) {
       students = [
@@ -85,7 +82,6 @@
     }
   });
 
-  // State variables
   let selectedDate = new Date();
   let searchQuery = "";
   let statusFilter = "all";
@@ -95,7 +91,6 @@
   let expandedStudent = null;
   let showCalendarView = false;
 
-  // Format date for display
   function formatDate(date) {
     return new Date(date).toLocaleDateString("en-US", {
       weekday: "short",
@@ -104,39 +99,32 @@
     });
   }
 
-  // Get today's date in YYYY-MM-DD format
   function getTodayString() {
     const today = new Date();
     return today.toISOString().split("T")[0];
   }
 
-  // Check if a student has attendance for today
   function hasAttendanceForToday(student) {
     const todayString = getTodayString();
     return student.attendance.some((record) => record.date === todayString);
   }
 
-  // Mark attendance
   function markAttendance(student, isPresent) {
     const todayString = getTodayString();
 
-    // Check if there's already an entry for today
     const existingIndex = student.attendance.findIndex(
       (record) => record.date === todayString
     );
 
     if (existingIndex >= 0) {
-      // Update existing record
       student.attendance[existingIndex].status = isPresent;
-      students = [...students]; // Trigger reactivity
+      students = [...students]; 
     } else {
-      // If marking absent, show modal for note
       if (!isPresent) {
         selectedStudent = student;
         showAbsenceModal = true;
         absenceNote = "";
       } else {
-        // Add new attendance record
         student.attendance = [
           ...student.attendance,
           {
@@ -145,7 +133,7 @@
             note: "",
           },
         ];
-        students = [...students]; // Trigger reactivity
+        students = [...students]; 
       }
     }
 
@@ -156,7 +144,6 @@
     });
   }
 
-  // Save absence with note
   function saveAbsence() {
     if (selectedStudent) {
       const todayString = getTodayString();
@@ -168,7 +155,7 @@
           note: absenceNote,
         },
       ];
-      students = [...students]; // Trigger reactivity
+      students = [...students];
 
       dispatch("attendanceChanged", {
         student: selectedStudent,
@@ -183,14 +170,12 @@
     absenceNote = "";
   }
 
-  // Calculate attendance percentage
   function calculateAttendancePercentage(attendance) {
     if (!attendance.length) return 0;
     const present = attendance.filter((record) => record.status).length;
     return Math.round((present / attendance.length) * 100);
   }
 
-  // Get status class based on attendance percentage
   function getStatusClass(percentage) {
     if (percentage >= 90) return "excellent";
     if (percentage >= 75) return "good";
@@ -198,7 +183,6 @@
     return "poor";
   }
 
-  // Get trend indicator (improving, declining, stable)
   function getTrend(attendance) {
     if (attendance.length < 4) return "stable";
 
@@ -215,14 +199,11 @@
     return "stable";
   }
 
-  // Filter students based on search and status filter
   $: filteredStudents = students.filter((student) => {
-    // Search filter
     const matchesSearch =
       searchQuery === "" ||
       student.name.toLowerCase().includes(searchQuery.toLowerCase());
 
-    // Status filter
     const percentage = calculateAttendancePercentage(student.attendance);
     let matchesStatus = true;
 
@@ -239,7 +220,6 @@
     return matchesSearch && matchesStatus;
   });
 
-  // Calculate overall statistics
   $: stats = {
     totalStudents: students.length,
     presentToday: students.filter((student) => {
@@ -268,7 +248,6 @@
     ).length,
   };
 
-  // Toggle expanded view for a student
   function toggleExpandStudent(student) {
     if (expandedStudent === student.id) {
       expandedStudent = null;
@@ -277,12 +256,10 @@
     }
   }
 
-  // Toggle between list and calendar view
   function toggleView() {
     showCalendarView = !showCalendarView;
   }
 
-  // Get the last 5 attendance records for a student
   function getRecentAttendance(student) {
     return [...student.attendance]
       .sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -351,7 +328,6 @@
   </header>
 
   {#if !showCalendarView}
-    <!-- List View -->
     <div class="attendance-list">
       <div class="header">
         <span class="student-info">Student</span>
@@ -499,7 +475,6 @@
       {/if}
     </div>
   {:else}
-    <!-- Calendar View -->
     <div class="calendar-view" transition:fade>
       <h2>Monthly Attendance View</h2>
       <p class="calendar-info">
@@ -507,7 +482,6 @@
       </p>
 
       <div class="calendar-container">
-        <!-- Calendar implementation would go here -->
         <p class="placeholder">Calendar view is under development</p>
       </div>
     </div>
@@ -520,7 +494,6 @@
     <div><span class="legend-box poor"></span> Poor (Below 60%)</div>
   </div>
 
-  <!-- Absence Note Modal -->
   {#if showAbsenceModal}
     <div class="modal-backdrop" transition:fade>
       <div class="modal" transition:slide={{ duration: 300 }}>

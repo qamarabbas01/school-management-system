@@ -187,7 +187,6 @@
   
   <style>
     .container {
-      /* max-width: 100px; */
       margin: auto;
       padding: 20px;
       text-align: center;

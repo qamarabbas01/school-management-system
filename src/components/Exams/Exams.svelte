@@ -2,16 +2,13 @@
     import { onMount, createEventDispatcher } from 'svelte';
     import { fade, slide, scale } from 'svelte/transition';
     
-    // Event dispatcher for external communication
     const dispatch = createEventDispatcher();
     
-    // Props with defaults
     export let title = "Exam Management";
     export let exams = [];
     export let students = [];
     export let canManage = true;
     
-    // Load sample data if none provided
     onMount(() => {
       if (exams.length === 0) {
         exams = [
@@ -204,7 +201,6 @@
       }
     });
     
-    // State variables
     let selectedExam = null;
     let searchQuery = '';
     let sortBy = 'name';
@@ -217,9 +213,8 @@
     let selectedStudent = null;
     let newExam = createEmptyExam();
     let newResult = { marks: 0, grade: '', remarks: '' };
-    let activeTab = 'exams'; // 'exams' or 'results'
+    let activeTab = 'exams';
     
-    // Create empty exam object
     function createEmptyExam() {
       return {
         name: '',
@@ -234,7 +229,6 @@
       };
     }
     
-    // Format date for display
     function formatDate(dateString) {
       return new Date(dateString).toLocaleDateString('en-US', { 
         weekday: 'short', 
@@ -244,14 +238,12 @@
       });
     }
     
-    // Get status class
     function getStatusClass(status) {
       if (status === 'completed') return 'completed';
       if (status === 'ongoing') return 'ongoing';
       return 'upcoming';
     }
     
-    // Get grade class
     function getGradeClass(grade) {
       if (grade === 'A+' || grade === 'A') return 'excellent';
       if (grade === 'B+' || grade === 'B') return 'good';
@@ -259,7 +251,6 @@
       return 'poor';
     }
     
-    // Calculate grade from marks
     function calculateGrade(marks, totalMarks) {
       const percentage = (marks / totalMarks) * 100;
       
@@ -273,13 +264,11 @@
       return 'F';
     }
     
-    // Start exam
     function startExam(exam) {
       selectedExam = exam;
       showStartExamModal = true;
     }
     
-    // Confirm start exam
     function confirmStartExam() {
       if (selectedExam) {
         exams = exams.map(exam => {
@@ -296,13 +285,11 @@
       selectedExam = null;
     }
     
-    // End exam
     function endExam(exam) {
       selectedExam = exam;
       showEndExamModal = true;
     }
     
-    // Confirm end exam
     function confirmEndExam() {
       if (selectedExam) {
         exams = exams.map(exam => {
@@ -319,13 +306,11 @@
       selectedExam = null;
     }
     
-    // Add new exam
     function addExam() {
       showAddExamModal = true;
       newExam = createEmptyExam();
     }
     
-    // Save new exam
     function saveExam() {
       const examId = exams.length > 0 ? Math.max(...exams.map(e => e.id)) + 1 : 1;
       
@@ -341,7 +326,6 @@
       showAddExamModal = false;
     }
     
-    // View student result
     function viewResult(student, exam) {
       selectedStudent = student;
       selectedExam = exam;
@@ -356,10 +340,8 @@
       showResultModal = true;
     }
     
-    // Save student result
     function saveResult() {
       if (selectedStudent && selectedExam) {
-        // Calculate grade if not provided
         if (!newResult.grade) {
           newResult.grade = calculateGrade(newResult.marks, selectedExam.totalMarks);
         }
@@ -369,7 +351,6 @@
             const existingResultIndex = student.results.findIndex(r => r.examId === selectedExam.id);
             
             if (existingResultIndex >= 0) {
-              // Update existing result
               const updatedResults = [...student.results];
               updatedResults[existingResultIndex] = { 
                 examId: selectedExam.id, 
@@ -381,7 +362,6 @@
                 results: updatedResults
               };
             } else {
-              // Add new result
               return {
                 ...student,
                 results: [
@@ -406,16 +386,14 @@
       selectedExam = null;
     }
     
-    // Get student result for an exam
     function getStudentResult(student, examId) {
       return student.results.find(r => r.examId === examId);
     }
     
-    // Calculate class average for an exam
     function calculateClassAverage(examId) {
       const results = students
         .map(student => getStudentResult(student, examId))
-        .filter(result => result); // Filter out undefined results
+        .filter(result => result);
       
       if (results.length === 0) return 0;
       
@@ -423,14 +401,13 @@
       return Math.round(total / results.length);
     }
     
-    // Calculate pass percentage for an exam
     function calculatePassPercentage(examId) {
       const exam = exams.find(e => e.id === examId);
       if (!exam) return 0;
       
       const results = students
         .map(student => getStudentResult(student, examId))
-        .filter(result => result); // Filter out undefined results
+        .filter(result => result);
       
       if (results.length === 0) return 0;
       
@@ -438,35 +415,31 @@
       return Math.round((passedCount / results.length) * 100);
     }
     
-    // Get highest score for an exam
     function getHighestScore(examId) {
       const results = students
         .map(student => getStudentResult(student, examId))
-        .filter(result => result); // Filter out undefined results
+        .filter(result => result);
       
       if (results.length === 0) return 0;
       
       return Math.max(...results.map(result => result.marks));
     }
     
-    // Get lowest score for an exam
     function getLowestScore(examId) {
       const results = students
         .map(student => getStudentResult(student, examId))
-        .filter(result => result); // Filter out undefined results
+        .filter(result => result);
       
       if (results.length === 0) return 0;
       
       return Math.min(...results.map(result => result.marks));
     }
     
-    // Filter exams based on status
     $: filteredExams = exams.filter(exam => {
       if (filterStatus === 'all') return true;
       return exam.status === filterStatus;
     });
     
-    // Sort exams
     $: sortedExams = [...filteredExams].sort((a, b) => {
       let comparison = 0;
       
@@ -481,14 +454,12 @@
       return sortOrder === 'asc' ? comparison : -comparison;
     });
     
-    // Filter students based on search
     $: filteredStudents = students.filter(student => {
       return searchQuery === '' || 
         student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         student.rollNumber.toLowerCase().includes(searchQuery.toLowerCase());
     });
     
-    // Get exam statistics
     function getExamStats(examId) {
       const exam = exams.find(e => e.id === examId);
       if (!exam) return null;
@@ -501,7 +472,6 @@
       };
     }
     
-    // Draw performance chart
     function drawPerformanceChart(canvas, examId) {
       if (!canvas) return;
       
@@ -511,17 +481,14 @@
       const exam = exams.find(e => e.id === examId);
       if (!exam) return;
       
-      // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Get results for this exam
       const results = students
         .map(student => getStudentResult(student, examId))
-        .filter(result => result); // Filter out undefined results
+        .filter(result => result);
       
       if (results.length === 0) return;
       
-      // Count grades
       const gradeCounts = {
         'A+': 0, 'A': 0, 'B+': 0, 'B': 0, 'C+': 0, 'C': 0, 'D': 0, 'F': 0
       };
@@ -532,7 +499,6 @@
         }
       });
       
-      // Colors for grades
       const gradeColors = {
         'A+': '#27ae60', 'A': '#2ecc71', 
         'B+': '#3498db', 'B': '#2980b9',
@@ -540,30 +506,25 @@
         'D': '#e67e22', 'F': '#e74c3c'
       };
       
-      // Draw bar chart
       const barWidth = 30;
       const spacing = 15;
       const maxHeight = 150;
       const baseline = canvas.height - 30;
       
-      // Find maximum count for scaling
       const maxCount = Math.max(...Object.values(gradeCounts));
       
       let x = 40;
       Object.entries(gradeCounts).forEach(([grade, count]) => {
         const height = count > 0 ? (count / maxCount) * maxHeight : 0;
         
-        // Draw bar
         ctx.fillStyle = gradeColors[grade] || '#95a5a6';
         ctx.fillRect(x, baseline - height, barWidth, height);
         
-        // Draw grade label
         ctx.fillStyle = '#2c3e50';
         ctx.font = '12px Arial';
         ctx.textAlign = 'center';
         ctx.fillText(grade, x + barWidth/2, baseline + 15);
         
-        // Draw count on top of bar
         if (count > 0) {
           ctx.fillStyle = '#2c3e50';
           ctx.fillText(count.toString(), x + barWidth/2, baseline - height - 5);
@@ -572,13 +533,11 @@
         x += barWidth + spacing;
       });
       
-      // Draw title
       ctx.fillStyle = '#2c3e50';
       ctx.font = 'bold 14px Arial';
       ctx.textAlign = 'center';
       ctx.fillText('Grade Distribution', canvas.width/2, 20);
       
-      // Draw y-axis
       ctx.strokeStyle = '#95a5a6';
       ctx.beginPath();
       ctx.moveTo(30, 30);
@@ -887,7 +846,6 @@
       </div>
     {/if}
     
-    <!-- Add Exam Modal -->
     {#if showAddExamModal}
       <div class="modal-backdrop" transition:fade>
         <div class="modal" transition:slide={{ duration: 300 }}>
@@ -991,7 +949,6 @@
       </div>
     {/if}
     
-    <!-- Start Exam Modal -->
     {#if showStartExamModal}
       <div class="modal-backdrop" transition:fade>
         <div class="modal" transition:slide={{ duration: 300 }}>
@@ -1025,7 +982,6 @@
       </div>
     {/if}
     
-    <!-- End Exam Modal -->
     {#if showEndExamModal}
       <div class="modal-backdrop" transition:fade>
         <div class="modal" transition:slide={{ duration: 300 }}>
@@ -1044,7 +1000,6 @@
       </div>
     {/if}
     
-    <!-- Result Modal -->
     {#if showResultModal}
       <div class="modal-backdrop" transition:fade>
         <div class="modal" transition:slide={{ duration: 300 }}>

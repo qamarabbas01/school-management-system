@@ -184,9 +184,7 @@
       {/if}
     </nav>
     
-    <!-- Main Content -->
     <main class="main-content">
-      <!-- Classes List View -->
       {#if activeView === 'list'}
         <div class="class-grid">
             {#each filteredClasses as cls}
@@ -240,7 +238,6 @@
         </div>
       {/if}
       
-      <!-- Class Details View -->
       {#if activeView === 'details' && selectedClass}
         <div class="class-detail-container">
           <div class="class-detail-header">
@@ -328,7 +325,6 @@
         </div>
       {/if}
       
-      <!-- Edit/Create Class Form -->
       {#if activeView === 'edit' || activeView === 'create'}
         <div class="form-container">
           <div class="form-header">
@@ -454,7 +450,6 @@
   </div>
   
   <style>
-    /* Base Styles */
     :root {
       --primary: #4f46e5;
       --primary-hover: #4338ca;

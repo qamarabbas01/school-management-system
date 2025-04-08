@@ -2,7 +2,6 @@
     import { onMount } from 'svelte';
     import { fade } from 'svelte/transition';
   
-    // Sample user data - in a real app, this would come from a store or API
     let users = [];
     let isLoading = false;
     let error = null;
@@ -18,23 +17,16 @@
       active: true
     };
   
-    // Roles available for selection
     const roles = [
       { value: 'admin', label: 'Administrator' },
       { value: 'editor', label: 'Editor' },
       { value: 'user', label: 'Standard User' }
     ];
   
-    // Fetch users from API
     async function fetchUsers() {
       isLoading = true;
       error = null;
       try {
-        // In a real app, replace with actual API call
-        // const response = await fetch('/api/users');
-        // users = await response.json();
-        
-        // Mock data for demonstration
         users = [
           { id: 1, name: 'Admin User', email: 'admin@example.com', role: 'admin', active: true },
           { id: 2, name: 'Editor User', email: 'editor@example.com', role: 'editor', active: true },
@@ -48,46 +40,33 @@
       }
     }
   
-    // Filter users based on search term
     $: filteredUsers = users.filter(user => 
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
   
-    // Initialize component
     onMount(() => {
       fetchUsers();
     });
   
-    // Open modal to edit user
     function editUser(user) {
       selectedUser = user;
       formData = { ...user };
       showUserModal = true;
     }
   
-    // Open modal to confirm deletion
     function confirmDelete(user) {
       selectedUser = user;
       showDeleteModal = true;
     }
   
-    // Save user changes
     async function saveUser() {
       isLoading = true;
       try {
-        // In a real app, this would be an API call
-        // const method = formData.id ? 'PUT' : 'POST';
-        // const url = formData.id ? `/api/users/${formData.id}` : '/api/users';
-        // const response = await fetch(url, { method, body: JSON.stringify(formData) });
-        
-        // Mock update for demonstration
         if (formData.id) {
-          // Update existing user
           const index = users.findIndex(u => u.id === formData.id);
           users[index] = { ...formData };
         } else {
-          // Add new user
           const newUser = { ...formData, id: Math.max(...users.map(u => u.id)) + 1 };
           users = [...users, newUser];
         }
@@ -101,14 +80,9 @@
       }
     }
   
-    // Delete user
     async function deleteUser() {
       isLoading = true;
       try {
-        // In a real app, this would be an API call
-        // await fetch(`/api/users/${selectedUser.id}`, { method: 'DELETE' });
-        
-        // Mock deletion for demonstration
         users = users.filter(user => user.id !== selectedUser.id);
         showDeleteModal = false;
         selectedUser = null;
@@ -120,7 +94,6 @@
       }
     }
   
-    // Reset form and open modal for new user
     function addNewUser() {
       formData = {
         id: '',
@@ -217,8 +190,7 @@
       <div 
         class="modal-backdrop" 
         on:click|self={() => showUserModal = false} 
-        on:keydown|self={(e) => { if (e.key === 'Escape') showUserModal = false; }} 
-        tabindex="0"
+        on:keydown|self={(e) => { if (e.key === 'Escape') showUserModal = false; }}
       >
         <div class="modal" transition:fade>
           <h2>{selectedUser ? 'Edit User' : 'Add New User'}</h2>
@@ -282,43 +254,12 @@
         </div>
       </div>
     {/if}
-    <div 
-      class="modal-backdrop" 
-      on:click|self={() => showDeleteModal = false} 
-      on:keydown|self={(e) => { if (e.key === 'Escape') showDeleteModal = false; }} 
-      tabindex="0"
-    >
-      {#if showDeleteModal}
-        <div class="modal modal-sm" transition:fade>
-          <h2>Confirm Deletion</h2>
-          <p>Are you sure you want to delete user <strong>{selectedUser?.name}</strong>? This action cannot be undone.</p>
-          
-          <div class="form-actions">
-            <button 
-              type="button" 
-              on:click={() => showDeleteModal = false} 
-              class="btn-secondary" 
-              disabled={isLoading}
-            >
-              Cancel
-            </button>
-            <button 
-              type="button" 
-              on:click={deleteUser} 
-              class="btn-danger" 
-              disabled={isLoading}
-            >
-              {isLoading ? 'Deleting...' : 'Delete User'}
-            </button>
-          </div>
-        </div>
-      {/if}
-    </div>
-    </div>
-  
     {#if showDeleteModal}
-      <div class="modal-backdrop" on:click|self={() => showDeleteModal = false}>
-        <div class="modal modal-sm" transition:fade>
+      <div 
+        class="modal-backdrop" 
+        on:click|self={() => showDeleteModal = false} 
+        on:keydown|self={(e) => { if (e.key === 'Escape') showDeleteModal = false; }}
+      >
           <h2>Confirm Deletion</h2>
           <p>Are you sure you want to delete user <strong>{selectedUser?.name}</strong>? This action cannot be undone.</p>
           
@@ -339,7 +280,6 @@
             >
               {isLoading ? 'Deleting...' : 'Delete User'}
             </button>
-          </div>
         </div>
       </div>
     {/if}
