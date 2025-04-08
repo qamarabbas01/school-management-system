@@ -11,6 +11,10 @@
     { id: "exams", label: "Exams", icon: "📝" },
     { id: "settings", label: "Settings", icon: "⚙️" },
   ];
+
+  const handleClick = () => {
+    console.log("Logout clicked");
+  };
 </script>
 
 <aside class="sidebar">
@@ -24,7 +28,7 @@
         <li
           class={currentView === item.id ? "active" : ""}
           on:click={() => handleNavigation(item.id)}
-          on:keydown={(e) => e.key === 'Enter' && handleNavigation(item.id)}
+          on:keydown={(e) => e.key === "Enter" && handleNavigation(item.id)}
         >
           <span class="icon">{item.icon}</span>
           <span class="label">{item.label}</span>
@@ -34,7 +38,7 @@
   </nav>
 
   <div class="sidebar-footer">
-    <button class="logout-btn">Logout</button>
+    <button class="logout-btn"  on:click={handleClick}>Logout</button>
   </div>
 </aside>
 

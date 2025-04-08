@@ -9,6 +9,7 @@
   import Attendance from "./components/Attendance/Attendance.svelte";
   import Exams from "./components/Exams/Exams.svelte";
   import Settings from "./components/Settings.svelte";
+  import Login from "./routes/login.svelte";
 
   let currentView = "dashboard";
   let user = { name: "Admin User", role: "Administrator" };
