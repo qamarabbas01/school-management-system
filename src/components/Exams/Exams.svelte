@@ -71,6 +71,66 @@
             status: "upcoming",
             startTime: "09:00",
             endTime: "12:00"
+          },
+          {
+            id: 6,
+            name: "Geography Project",
+            subject: "Geography",
+            totalMarks: 100,
+            passingMarks: 40,
+            date: "2023-05-02",
+            duration: 60,
+            status: "upcoming",
+            startTime: "10:00",
+            endTime: "11:00"
+          },
+          {
+            id: 7,
+            name: "Physical Education Test",
+            subject: "Physical Education",
+            totalMarks: 50,
+            passingMarks: 20,
+            date: "2023-05-05",
+            duration: 30,
+            status: "upcoming",
+            startTime: "14:00",
+            endTime: "14:30"
+          },
+          {
+            id: 8,
+            name: "Art and Craft Exhibition",
+            subject: "Art",
+            totalMarks: 100,
+            passingMarks: 40,
+            date: "2023-05-10",
+            duration: 120,
+            status: "upcoming",
+            startTime: "09:00",
+            endTime: "11:00"
+          },
+          {
+            id: 9,
+            name: "Music Theory Exam",
+            subject: "Music",
+            totalMarks: 50,
+            passingMarks: 20,
+            date: "2023-05-15",
+            duration: 45,
+            status: "upcoming",
+            startTime: "10:30",
+            endTime: "11:15"
+          },
+          {
+            id: 10,
+            name: "Physical Education Final",
+            subject: "Physical Education",
+            totalMarks: 100,
+            passingMarks: 40,
+            date: "2023-05-20",
+            duration: 120,
+            status: "upcoming",
+            startTime: "09:00",
+            endTime: "11:00"
           }
         ];
       }

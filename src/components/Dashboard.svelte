@@ -16,7 +16,7 @@
     { id: 11, type: "attendance", description: "Attendance marked for Class 10", time: "3 hours ago" },
     { id: 12, type: "exam", description: "Math exam results uploaded", time: "5 hours ago" },
     { id: 13, type: "notice", description: "New notice added about Sports Day", time: "1 day ago" },
-    { id: 14, type: "fee", description: "Fee payment received from Jack Smith", time: "1 day ago" }
+    { id: 14, type: "fee", description: "Fee payment received from Jack Smith", time: "1 day ago" },
   ];
 
   let attendanceData = {

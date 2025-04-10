@@ -9,6 +9,10 @@
     { id: "classes", label: "Classes", icon: "🏫" },
     { id: "attendance", label: "Attendance", icon: "📋" },
     { id: "exams", label: "Exams", icon: "📝" },
+    { id: "library", label: "Library", icon: "📚" },
+    { id: "transportation", label: "Transportation", icon: "🚌" },
+    { id: "events", label: "Events", icon: "🎉" },
+    { id: "services", label: "Services", icon: "📈" },
     { id: "settings", label: "Settings", icon: "⚙️" },
   ];
 

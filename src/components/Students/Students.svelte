@@ -17,10 +17,6 @@
     isModalOpen = true;
   }
 
-  function closeModal() {
-    isModalOpen = false;
-  }
-
   function addStudent(event) {
     const newStudent = { ...event.detail, id: nextId++ };
     students = [...students, newStudent];

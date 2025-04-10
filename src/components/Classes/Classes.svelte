@@ -43,6 +43,50 @@
         capacity: 20,
         enrolled: 18,
         description: "Analysis of classic and contemporary literary works."
+      },
+      { 
+        id: 5, 
+        name: "Computer Science Basics", 
+        department: "Computer Science",
+        schedule: "Mon, Wed 10:45 AM - 12:15 PM",
+        room: "E-202",
+        teacher: "Prof. Albert Einstein",
+        capacity: 30,
+        enrolled: 30,
+        description: "Introduction to programming and algorithm design."
+      },
+      { 
+        id: 6, 
+        name: "Art History", 
+        department: "Art",
+        schedule: "Tue, Thu 3:00 PM - 4:30 PM",
+        room: "F-101",
+        teacher: "Dr. Grace Hopper",
+        capacity: 15,
+        enrolled: 10,
+        description: "Exploration of art movements and their cultural significance."
+      },
+      { 
+        id: 7, 
+        name: "Music Theory", 
+        department: "Music",
+        schedule: "Mon, Fri 1:00 PM - 2:30 PM",
+        room: "G-303",
+        teacher: "Prof. Richard Feynman",
+        capacity: 20,
+        enrolled: 15,
+        description: "Study of musical notation, harmony, and composition."
+      },
+      { 
+        id: 8, 
+        name: "Physical Education", 
+        department: "Physical Education",
+        schedule: "Wed, Fri 3:00 PM - 4:30 PM",
+        room: "Gym A",
+        teacher: "Dr. Ada Lovelace",
+        capacity: 40,
+        enrolled: 35,
+        description: "Focus on fitness, sportsmanship, and health education."
       }
     ];
     
