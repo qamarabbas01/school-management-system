@@ -11,6 +11,7 @@
   import Settings from "./components/Settings.svelte";
   import Login from "./routes/login.svelte";
   import Library from "./components/Library/library.svelte";
+  import Transportation from "./components/Transportation/Transportation.svelte";
 
   let currentView = "dashboard";
   let user = { name: "Admin User", role: "Administrator" };
@@ -134,10 +135,12 @@
       <Exams />
     {:else if currentView === "settings"}
       <Settings />
-    {:else if currentView === "login"}
+    {:else if currentView === "logout"}
       <Login />  
     {:else if currentView === "library"}
-     <Library />  
+     <Library />
+    {:else if currentView === "transportation"}
+      <Transportation />
     {:else}
       <div class="loading">Comming Soon...</div>
     {/if}
