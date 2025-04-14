@@ -79,7 +79,7 @@
         <h2>Transportation Routes</h2>
         
         <div class="search-container">
-          <input 
+          <input
             type="text" 
             placeholder="Search routes or destinations..." 
             bind:value={searchQuery}
