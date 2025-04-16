@@ -13,6 +13,7 @@
   import Library from "./components/Library/library.svelte";
   import Transportation from "./components/Transportation/Transportation.svelte";
   import Events from "./components/Events/Events.svelte";
+  import Services from "./components/Services/Services.svelte";
 
   let currentView = "dashboard";
   let user = { name: "Admin User", role: "Administrator" };
@@ -144,6 +145,8 @@
       <Transportation />
     {:else if currentView === "events"}
       <Events />
+    {:else if currentView === "services"}
+      <Services />
     {:else}
       <div class="loading">Comming Soon...</div>
     {/if}
