@@ -189,8 +189,8 @@
       <tbody>
         {#each filteredUsers as user (user.id)}
           <tr>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
+            <td class="name">{user.name}</td>
+            <td class="email">{user.email}</td>
             <td>
               <span class={`role-badge ${user.role}`}>
                 {roles.find((r) => r.value === user.role)?.label || user.role}
@@ -424,6 +424,15 @@
   .empty-state {
     text-align: center;
     padding: 2rem;
+    color: #6b7280;
+  }
+
+  .name {
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .email {
     color: #6b7280;
   }
 
