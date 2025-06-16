@@ -138,9 +138,9 @@
     {:else if currentView === "settings"}
       <Settings />
     {:else if currentView === "logout"}
-      <Login />  
+      <Login />
     {:else if currentView === "library"}
-     <Library />
+      <Library />
     {:else if currentView === "transportation"}
       <Transportation />
     {:else if currentView === "events"}

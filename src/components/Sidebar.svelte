@@ -42,7 +42,7 @@
   </nav>
 
   <div class="sidebar-footer">
-    <button class="logout-btn"  on:click={handleClick}>Logout</button>
+    <button class="logout-btn" on:click={handleClick}>Logout</button>
   </div>
 </aside>
 
@@ -65,18 +65,15 @@
     font-weight: bold;
     color: #ecf0f1;
   }
-
   nav {
     flex: 1;
     overflow-y: auto;
   }
-
   ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
   }
-
   li {
     padding: 15px 20px;
     cursor: pointer;
@@ -87,31 +84,25 @@
     align-items: center;
     border-left: 4px solid transparent;
   }
-
   li:hover {
     background-color: #34495e;
     transform: translateX(5px);
   }
-
   li.active {
     background-color: #3498db;
     border-left: 4px solid #2980b9;
   }
-
   .icon {
     margin-right: 10px;
     font-size: 18px;
   }
-
   .label {
     font-size: 16px;
   }
-
   .sidebar-footer {
     padding: 20px;
     border-top: 1px solid #34495e;
   }
-
   .logout-btn {
     width: 100%;
     padding: 10px;
@@ -122,7 +113,6 @@
     cursor: pointer;
     transition: background-color 0.3s;
   }
-
   .logout-btn:hover {
     background-color: #c0392b;
   }
