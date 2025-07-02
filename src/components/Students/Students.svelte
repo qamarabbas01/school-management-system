@@ -38,7 +38,7 @@
   <div class="students-table">
     <table>
       <thead>
-        <tr>
+        <tr class="table-header">
           <th>ID</th>
           <th>Name</th>
           <th>Grade</th>
@@ -50,7 +50,7 @@
       </thead>
       <tbody>
         {#each filteredStudents as student}
-          <tr>
+          <tr class="student-row">
             <td>{student.id}</td>
             <td>{student.name}</td>
             <td>{student.grade}</td>
@@ -120,5 +120,16 @@
     display: flex;
     gap: 10px;
   }
+
+  .table-header {
+    background-color: #e3e3e3;
+    color: #333;
+    font-weight: bold;
+  }
   
+  .student-row {
+    transition: background-color 0.3s;
+    background-color: #fff;
+    color: #333;
+  }
 </style>
